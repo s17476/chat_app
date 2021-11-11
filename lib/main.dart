@@ -35,8 +35,14 @@ class _ChatAppState extends State<ChatApp> {
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             title: 'Chat App',
             theme: ThemeData(
+              textTheme: Theme.of(context).textTheme.copyWith(
+                    headline1: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
               appBarTheme: Theme.of(context).appBarTheme.copyWith(
                     backgroundColor: Colors.pink,
                   ),
