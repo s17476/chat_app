@@ -18,10 +18,12 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imgAvatar = NetworkImage(imgUrl);
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Stack(
+          alignment: isMe ? Alignment.topLeft : Alignment.topRight,
           children: [
             Container(
               key: _messageKey,
@@ -45,7 +47,7 @@ class MessageBubble extends StatelessWidget {
               ),
               // width: MediaQuery.of(context).size.width * 0.7,
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Column(
                 crossAxisAlignment:
                     isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
@@ -64,20 +66,25 @@ class MessageBubble extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text(
-                    message,
-                    style: TextStyle(
-                      color: isMe
-                          ? Colors.black
-                          : Theme.of(context).textTheme.headline1!.color,
+                  Padding(
+                    padding: isMe
+                        ? const EdgeInsets.only(left: 10)
+                        : const EdgeInsets.only(right: 10),
+                    child: Text(
+                      message,
+                      style: TextStyle(
+                        color: isMe
+                            ? Colors.black
+                            : Theme.of(context).textTheme.headline1!.color,
+                      ),
+                      textAlign: isMe ? TextAlign.end : TextAlign.start,
                     ),
-                    textAlign: isMe ? TextAlign.end : TextAlign.start,
                   ),
                 ],
               ),
             ),
             CircleAvatar(
-              backgroundImage: NetworkImage(imgUrl),
+              backgroundImage: imgAvatar,
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:chat_app/screens/auth_screen.dart';
 import 'package:chat_app/screens/chat_screen.dart';
+import 'package:chat_app/screens/splasch_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +76,9 @@ class _ChatAppState extends State<ChatApp> {
             home: StreamBuilder(
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (ctx, userSnapshot) {
+                if (userSnapshot.connectionState == ConnectionState.waiting) {
+                  return const SpalshScreen();
+                }
                 if (userSnapshot.hasData) {
                   return const ChatScreen();
                 }
